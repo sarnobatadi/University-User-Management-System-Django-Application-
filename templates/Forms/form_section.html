@@ -1,0 +1,126 @@
+{% extends 'Forms/base.html' %}
+
+{% block title %}
+Section Management
+{% endblock title %}
+
+{% block content %}
+
+<div class="card-body">
+  <h1>Section Management Form</h1>
+  <table id="datatablesSimple">
+    <thead>
+      <tr>
+        <th>Course Id</th>
+        <th>Sec Id</th>
+        <th>Semester</th>
+        <th>Year</th>
+        <th>Section Building</th>
+        <th>Room No</th>
+        <th>TimeSlot Id</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      {% for sdata in FormData%}
+      <tr>
+        <th>{{sdata.course_id}}</th>
+        <th>{{sdata.sec_id}} </th>
+        <th>{{sdata.semester}}</th>
+        <th>{{sdata.year}} </th>
+        <th>{{sdata.section_buidling}} </th>
+        <th>{{sdata.room_no}} </th>
+        <th>{{sdata.timeslot_id}} </th>
+        <td>
+          <div class='btn-group'>
+            
+            <a href="/deleteSection/{{sdata.sec_id}}" class='btn btn-sm btn-secondary' data-toggle='tooltip'
+              title='Delete' onclick="return confirm('Are you sure you want to delete this?')">
+              <i class='fa fa-trash'></i>
+            </a>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<div class="card-body">
+  <h4>Insert New Entry</h4>
+  <form class="js-validation-bootstrap" action="/Section/" method="POST">
+    {% csrf_token%}
+    <div class="form-group row">
+      <label class="col-lg-4 col-form-label" for="dept_name">Course id</label>
+      <div class="col-lg-8">
+        <select name="course_id" id="course_id">
+          {% for sdata in OptionData1%}
+          <option value="{{sdata}}">{{sdata}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <br>
+    <div class="form-group row">
+      <label class="col-lg-4 col-form-label" for="sec_id">Section id</label>
+      <div class="col-lg-8">
+        <input type="text" class="form-control" id="sec_id" name="sec_id" placeholder="Section id" required>
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <label class="col-lg-4 col-form-label" for="semester">Semester</label>
+      <div class="col-lg-8">
+        <input type="text" class="form-control" id="semester" name="semester" placeholder="Semester" required>
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <label class="col-lg-4 col-form-label" for="year">Year</label>
+      <div class="col-lg-8">
+        <input type="text" class="form-control" id="year" name="year" placeholder="Year" required>
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <label class="col-lg-4 col-form-label" for="section_buidling">Section Building</label>
+      <div class="col-lg-8">
+        <input type="text" class="form-control" id="section_buidling" name="section_buidling" placeholder="section building"
+          required>
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <label class="col-lg-4 col-form-label" for="room_no">Room No</label>
+      <div class="col-lg-8">
+        <select name="room_no" id="room_no">
+          {% for sdata in OptionData2%}
+          <option value="{{sdata}}">{{sdata}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-lg-4 col-form-label" for="timeslot_id">TimeSlot id</label>
+      <div class="col-lg-8">
+        <select name="timeslot_id" id="timeslot_id">
+          {% for sdata in OptionData3%}
+          <option value="{{sdata}}">{{sdata}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-block" style="display: flex; justify-content:space-between">
+      <button type="submit" class="btn btn-success" style="margin: 0.3rem;"><i
+          class="fas fa-save"></i>&nbsp;&nbsp;Save</button>
+      <br>
+    </div>
+  </form>
+</div>
+
+{%endblock%}

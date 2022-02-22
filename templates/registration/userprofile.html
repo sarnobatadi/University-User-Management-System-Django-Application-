@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Add Team
+{% endblock title %}
+
+{% block content %}
+<div class="conatiner-fluid px-4">
+    <br>
+    <h1 class="mt-4">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        Edit AppUser</h1>
+    <br>
+                                    {% if messages %}
+                                    <div class="alert alert-warning" role="alert">
+                                        <ul class="messages">
+                                            {% for message in messages %}
+                                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message}}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    {% else %}
+                                    <div class="alert alert-primary" role="alert">
+                                        <ul>Username can contain max 11 characters!</ul>
+                                        <ul>Password must contain min 6 and max 11 characters,at least one alphabet
+                                            should be Lower Case [a-z], at least one alphabet should be of Upper Case
+                                            [A-Z], at least 1 number or digit between [0-9], at least 1 character from [
+                                            _ or @ or $ ], blank spaces are restricted.</ul>
+                                    </div>
+                                    {% endif %}
+                    <form class="js-validation-bootstrap" action="{% url 'userprof' id=request.user.id %}" method="POST">
+                        {% csrf_token %}
+                    <button type = 'submit' disabled style = "display:none" aria-hidden = "true" ></button>
+
+                    <div class="form-group row">
+                        <label class="col-lg-4 col-form-label">Username</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" value ="{% if username %}{{username}}{%else%}{{request.user.username}}{% endif %}" id="val-username" name="username" placeholder="Enter username" >
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group row" >
+                        <label class="col-lg-4 col-form-label">Change Password??</label>
+                        <div class="col-lg-8">
+                            <input type="password" class="form-control"  id="password" name="password" placeholder="Enter New Password" >
+                        </div>
+                    </div>
+                    <br>
+                        <button type="submit" class="btn btn-success" value="Update" style="margin: 1rem;">
+                            <i class="fas fa-save"></i>
+                            <a>Update</a>
+                        </button>
+                        
+                        <button class="btn btn-danger" style="margin: 1rem;" onclick="history.back()">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                            <a>Back</a>
+                        </button>
+                    </form>
+                    </hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
