@@ -2,7 +2,7 @@
 
 ### User Management System for University Schema 
 
-
+<img src='Schema.png'>
 
 
 ### How to use
